@@ -1,6 +1,8 @@
 #include "ulog_parameters_dialog.h"
 #include "ui_ulog_parameters_dialog.h"
+#include "px4_enum_mapping.h"
 
+#include <QCheckBox>
 #include <QTableWidget>
 #include <QSettings>
 #include <QHeaderView>
@@ -94,6 +96,11 @@ void ULogParametersDialog::restoreSettings()
 
   table_params->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Interactive);
   table_params->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Interactive);
+
+  // Load enum names setting (opt-in; off by default to preserve prior behavior).
+  ui->checkBoxEnumNames->setChecked(settings.value(kEnumNamesEnabled, false).toBool());
+  connect(ui->checkBoxEnumNames, &QCheckBox::toggled, this,
+          [](bool checked) { QSettings().setValue(kEnumNamesEnabled, checked); });
 }
 
 ULogParametersDialog::~ULogParametersDialog()

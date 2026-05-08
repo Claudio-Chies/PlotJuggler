@@ -7,6 +7,9 @@
 #ifndef TIMESERIES_QWT_H
 #define TIMESERIES_QWT_H
 
+#include <QVariantMap>
+#include <optional>
+
 #include "qwt_series_data.h"
 #include "PlotJuggler/plotdata.h"
 #include "PlotJuggler/transform_function.h"
@@ -97,5 +100,12 @@ protected:
 };
 
 //---------------------------------------------------------
+
+// Returns the VALUE_LABELS attribute on the wrapped data, or empty.
+QVariantMap valueLabelMap(const QwtSeriesData<QPointF>* series);
+
+// Looks up a symbolic label for `v` in `map`. Returns nullopt unless
+// `v` is exactly an integer (no fractional part) and present in the map.
+std::optional<QString> lookupValueLabel(const QVariantMap& map, double v);
 
 #endif  // PLOTDATA_H

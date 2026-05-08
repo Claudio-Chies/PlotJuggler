@@ -9,6 +9,9 @@
 
 #include "ulog_parser.h"
 #include "ulog_parameters_dialog.h"
+#include "px4_enum_mapping.h"
+
+#include "PlotJuggler/plotdata.h"
 
 DataLoadULog::DataLoadULog() : _main_win(nullptr)
 {
@@ -50,6 +53,10 @@ bool DataLoadULog::readDataFromFile(FileLoadInfo* fileload_info, PlotDataMapRef&
 
   ULogParser parser(datastream);
 
+  QSettings settings;
+  const bool enum_names_enabled = settings.value(kEnumNamesEnabled, false).toBool();
+  PX4EnumMapping enum_mapping(filename);
+
   const auto& timeseries_map = parser.getTimeseriesMap();
   auto min_msg_time = std::numeric_limits<double>::max();
   for (const auto& it : timeseries_map)
@@ -58,11 +65,36 @@ bool DataLoadULog::readDataFromFile(FileLoadInfo* fileload_info, PlotDataMapRef&
     const ULogParser::Timeseries& timeseries = it.second;
     auto group = plot_data.getOrCreateGroup(sucsctiption_name);
 
+    const QString topic_name = QString::fromStdString(sucsctiption_name);
+
     for (const auto& data : timeseries.data)
     {
       std::string series_name = sucsctiption_name + data.first;
 
       auto series = plot_data.addNumeric(series_name, group);
+
+      // ULog records field names as "/nav_state", "/position/lat",
+      // "/vec.00", etc. We use the last "/"-segment as the lookup key,
+      // dropping any nested struct path. Limitation: distinct fields
+      // with the same leaf name on different sub-structs cannot be
+      // disambiguated and will share whatever mapping the JSON provides
+      // for that leaf. The lookup also strips trailing instance suffix
+      // ".NN" used by ULog multi-instance arrays.
+      if (enum_names_enabled)
+      {
+        QString field = QString::fromStdString(data.first);
+        if (field.startsWith('/'))
+        {
+          field.remove(0, 1);
+        }
+        const int slash = field.lastIndexOf('/');
+        const QString leaf = (slash >= 0) ? field.mid(slash + 1) : field;
+        QVariantMap enum_map = enum_mapping.lookup(topic_name, leaf);
+        if (!enum_map.isEmpty())
+        {
+          series->second.setAttribute(PJ::VALUE_LABELS, enum_map);
+        }
+      }
 
       for (size_t i = 0; i < data.second.size(); i++)
       {

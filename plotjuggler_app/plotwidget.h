@@ -174,6 +174,8 @@ private slots:
   void on_externallyResized(const QRectF& new_rect);
 
 private:
+  void updateYAxisEnumDraw();
+
   QAction* _action_removeAllCurves;
   QAction* _action_edit;
   QAction* _action_formula;

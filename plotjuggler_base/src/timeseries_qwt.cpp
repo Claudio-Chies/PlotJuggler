@@ -5,11 +5,51 @@
  */
 
 #include "timeseries_qwt.h"
+#include <cmath>
 #include <limits>
 #include <stdexcept>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QString>
+
+QVariantMap valueLabelMap(const QwtSeriesData<QPointF>* series)
+{
+  auto wrapper = dynamic_cast<const QwtSeriesWrapper*>(series);
+  if (!wrapper)
+  {
+    return {};
+  }
+  const PJ::PlotDataXY* data = wrapper->plotData();
+  if (!data)
+  {
+    return {};
+  }
+  QVariant attr = data->attribute(PJ::VALUE_LABELS);
+  if (!attr.isValid() || attr.type() != QVariant::Map)
+  {
+    return {};
+  }
+  return attr.toMap();
+}
+
+std::optional<QString> lookupValueLabel(const QVariantMap& map, double v)
+{
+  if (map.isEmpty() || std::isnan(v) || std::isinf(v))
+  {
+    return std::nullopt;
+  }
+  const qint64 iv = qRound64(v);
+  if (static_cast<double>(iv) != v)
+  {
+    return std::nullopt;
+  }
+  auto it = map.find(QString::number(iv));
+  if (it == map.end())
+  {
+    return std::nullopt;
+  }
+  return it.value().toString();
+}
 
 RangeOpt QwtSeriesWrapper::getVisualizationRangeY(Range range_x)
 {
@@ -72,6 +112,15 @@ std::optional<QPointF> QwtTimeseries::sampleFromTime(double t)
 TransformedTimeseries::TransformedTimeseries(const PlotData* source_data)
   : QwtTimeseries(&_dst_data), _dst_data(source_data->plotName(), {}), _src_data(source_data)
 {
+  // Only VALUE_LABELS is mirrored: axis renderers and the cursor tracker
+  // see the wrapped destination series, and need the mapping to render
+  // symbolic labels for raw (un-transformed) curves. Cleared again when
+  // a transform is applied (transforms invalidate the value->label map).
+  auto labels = source_data->attribute(VALUE_LABELS);
+  if (labels.isValid())
+  {
+    _dst_data.setAttribute(VALUE_LABELS, labels);
+  }
 }
 
 TransformFunction::Ptr TransformedTimeseries::transform()
@@ -88,6 +137,17 @@ bool TransformedTimeseries::setTransform(QString transform_ID)
   if (transform_ID.isEmpty())
   {
     _transform.reset();
+    // Restore VALUE_LABELS from source when transform is cleared (data is
+    // now a 1:1 copy, so the mapping applies again).
+    auto attr = _src_data->attribute(VALUE_LABELS);
+    if (attr.isValid())
+    {
+      _dst_data.setAttribute(VALUE_LABELS, attr);
+    }
+    else
+    {
+      _dst_data.clearAttribute(VALUE_LABELS);
+    }
     return false;
   }
 
@@ -96,6 +156,9 @@ bool TransformedTimeseries::setTransform(QString transform_ID)
   {
     return false;
   }
+  // Clear VALUE_LABELS: transformed values no longer correspond to the
+  // original mapping (e.g., scale, derivative, filter).
+  _dst_data.clearAttribute(VALUE_LABELS);
   std::vector<PlotData*> dest = { &_dst_data };
   _dst_data.clear();
   _transform->setData(nullptr, { _src_data }, dest);

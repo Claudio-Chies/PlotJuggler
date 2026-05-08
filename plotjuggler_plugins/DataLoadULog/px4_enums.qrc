@@ -1,0 +1,6 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource prefix="/plotjuggler/DataLoadULog">
+    <file alias="px4_enums.json">resources/px4_enums.json</file>
+  </qresource>
+</RCC>

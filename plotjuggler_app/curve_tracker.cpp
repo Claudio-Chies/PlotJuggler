@@ -14,6 +14,7 @@
 #include <qevent.h>
 #include <QFontDatabase>
 #include <QSettings>
+#include "timeseries_qwt.h"
 
 struct compareX
 {
@@ -156,6 +157,12 @@ void CurveTracker::setPosition(const QPointF& tracker_position)
       double value = point.y();
       LineParts parts;
       parts.value = QString::number(value, 'f', prec);
+      // Replace numeric value with symbolic label when the underlying
+      // series carries a VALUE_LABELS attribute.
+      if (auto label = lookupValueLabel(valueLabelMap(curve->data()), value))
+      {
+        parts.value = *label;
+      }
       if (maybe_reference)
       {
         auto delta_str = QString::number(value - maybe_reference->y(), 'f', prec);

@@ -52,6 +52,7 @@
 #include "PlotJuggler/svg_util.h"
 #include "point_series_xy.h"
 #include "colormap_selector.h"
+#include "timeseries_qwt.h"
 
 #include "statistics_dialog.h"
 
@@ -66,6 +67,43 @@ class TimeScaleDraw : public QwtScaleDraw
     }
     return dt.toString("hh:mm:ss.z\nyyyy MMM dd");
   }
+};
+
+class EnumScaleDraw : public QwtScaleDraw
+{
+public:
+  explicit EnumScaleDraw(QVariantMap value_map) : _value_map(std::move(value_map))
+  {
+  }
+
+  const QVariantMap& valueMap() const
+  {
+    return _value_map;
+  }
+
+  QwtText label(double v) const override
+  {
+    auto label = lookupValueLabel(_value_map, v);
+    if (label)
+    {
+      return QwtText(*label);
+    }
+    if (std::isnan(v) || std::isinf(v))
+    {
+      return QwtScaleDraw::label(v);
+    }
+    const qint64 iv = qRound64(v);
+    if (static_cast<double>(iv) != v)
+    {
+      // Non-integer tick (zoom level produced fractional ticks); skip the
+      // label entirely rather than mis-labelling.
+      return QwtText();
+    }
+    return QwtText(QString::number(iv));
+  }
+
+private:
+  QVariantMap _value_map;
 };
 
 const double MAX_DOUBLE = std::numeric_limits<double>::max() / 2;
@@ -410,6 +448,7 @@ PlotWidgetBase::CurveInfo* PlotWidget::addCurve(const std::string& name, QColor 
       timeseries->setTimeOffset(_time_offset);
     }
   }
+  updateYAxisEnumDraw();
   _tracker->redraw();
   _reference_tracker->redraw();
   return info;
@@ -418,8 +457,59 @@ PlotWidgetBase::CurveInfo* PlotWidget::addCurve(const std::string& name, QColor 
 void PlotWidget::removeCurve(const QString& title)
 {
   PlotWidgetBase::removeCurve(title);
+  updateYAxisEnumDraw();
   _tracker->redraw();
   _reference_tracker->redraw();
+}
+
+void PlotWidget::updateYAxisEnumDraw()
+{
+  // Compute the "shared" VALUE_LABELS map across all curves (curves on
+  // separate Y axes are not currently distinguished here; PlotJuggler
+  // groups curves on a single yLeft). If every curve carries the SAME
+  // map, install an EnumScaleDraw. Otherwise restore the default.
+  QVariantMap shared_map;
+  bool first = true;
+  bool conflict = false;
+  for (const auto& info : curveList())
+  {
+    if (!info.curve)
+    {
+      continue;
+    }
+    QVariantMap m = valueLabelMap(info.curve->data());
+    if (m.isEmpty())
+    {
+      conflict = true;
+      break;
+    }
+    if (first)
+    {
+      shared_map = std::move(m);
+      first = false;
+    }
+    else if (shared_map != m)
+    {
+      conflict = true;
+      break;
+    }
+  }
+
+  const bool has_enum = !conflict && !first && !shared_map.isEmpty();
+  auto* current =
+      dynamic_cast<const EnumScaleDraw*>(qwtPlot()->axisScaleDraw(QwtPlot::yLeft));
+  if (has_enum)
+  {
+    if (current && current->valueMap() == shared_map)
+    {
+      return;  // already up to date, avoid churn
+    }
+    qwtPlot()->setAxisScaleDraw(QwtPlot::yLeft, new EnumScaleDraw(shared_map));
+  }
+  else if (current)
+  {
+    qwtPlot()->setAxisScaleDraw(QwtPlot::yLeft, new QwtScaleDraw);
+  }
 }
 
 void PlotWidget::onDataSourceRemoved(const std::string& src_name)

@@ -52,7 +52,14 @@ enum PlotAttribute
 
   // Color of the curve in the plot.
   // Type: QColor
-  COLOR_HINT
+  COLOR_HINT,
+
+  // Map of integer values to symbolic labels (e.g. enum constants).
+  // When present, axis ticks and the cursor tracker render the symbolic
+  // label instead of the raw number. Numeric semantics are preserved.
+  // Type: QVariantMap with stringified-integer keys (e.g. "0", "1") and
+  // QString values.
+  VALUE_LABELS
 };
 
 using Attributes = std::unordered_map<PlotAttribute, QVariant>;
@@ -68,6 +75,8 @@ inline bool CheckType(PlotAttribute attr, const QVariant& value)
       return value.type() == QVariant::Bool;
     case TOOL_TIP:
       return value.type() == QVariant::String;
+    case VALUE_LABELS:
+      return value.type() == QVariant::Map;
   }
   return false;
 }
@@ -254,6 +263,11 @@ public:
     {
       throw std::runtime_error("PlotDataBase::setAttribute : wrong type");
     }
+  }
+
+  void clearAttribute(PlotAttribute id)
+  {
+    _attributes.erase(id);
   }
 
   QVariant attribute(PlotAttribute id) const

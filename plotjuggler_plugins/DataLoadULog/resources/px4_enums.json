@@ -1,0 +1,992 @@
+{
+  "_meta": {
+    "description": "PX4 uORB enum mappings for PlotJuggler ULog loader",
+    "generated_from": "PX4-Autopilot/msg using scripts/extract_px4_enums.py",
+    "px4_version": "v1.15.x (May 2026)",
+    "note": "Regenerate with: ./scripts/extract_px4_enums.py <px4-msg-dir> px4_enums.json"
+  },
+  "action_request": {
+    "action": {
+      "0": "DISARM",
+      "1": "ARM",
+      "2": "TOGGLE_ARMING",
+      "3": "UNKILL",
+      "4": "KILL",
+      "5": "SWITCH_MODE",
+      "6": "VTOL_TRANSITION_TO_MULTICOPTER",
+      "7": "VTOL_TRANSITION_TO_FIXEDWING",
+      "8": "TERMINATION"
+    },
+    "source": {
+      "0": "STICK_GESTURE",
+      "1": "RC_SWITCH",
+      "2": "RC_BUTTON",
+      "3": "RC_MODE_SLOT"
+    }
+  },
+  "actuator_test": {
+    "action": {
+      "0": "RELEASE_CONTROL",
+      "1": "DO_CONTROL"
+    },
+    "function": {
+      "101": "MOTOR1",
+      "201": "SERVO1"
+    }
+  },
+  "airspeed_wind": {
+    "source": {
+      "0": "AS_BETA_ONLY",
+      "1": "AS_SENSOR_1",
+      "2": "AS_SENSOR_2",
+      "3": "AS_SENSOR_3"
+    }
+  },
+  "arming_check_reply": {
+    "health_component_index": {
+      "0": "NONE"
+    }
+  },
+  "arming_check_reply_v0": {
+    "health_component_index": {
+      "0": "NONE"
+    }
+  },
+  "autotune_attitude_control_status": {
+    "state": {
+      "0": "IDLE",
+      "1": "INIT",
+      "2": "ROLL_AMPLITUDE_DETECTION",
+      "3": "ROLL",
+      "4": "ROLL_PAUSE",
+      "5": "PITCH_AMPLITUDE_DETECTION",
+      "6": "PITCH",
+      "7": "PITCH_PAUSE",
+      "8": "YAW_AMPLITUDE_DETECTION",
+      "9": "YAW",
+      "10": "YAW_PAUSE",
+      "11": "VERIFICATION",
+      "12": "APPLY",
+      "13": "TEST",
+      "14": "COMPLETE",
+      "15": "FAIL",
+      "16": "WAIT_FOR_DISARM"
+    }
+  },
+  "aux_global_position": {
+    "source": {
+      "0": "UNKNOWN",
+      "1": "GNSS",
+      "2": "VISION",
+      "3": "PSEUDOLITES",
+      "4": "TERRAIN",
+      "5": "MAGNETIC",
+      "6": "ESTIMATOR",
+      "7": "LEO"
+    }
+  },
+  "battery_status": {
+    "source": {
+      "0": "POWER_MODULE",
+      "1": "EXTERNAL",
+      "2": "ESCS"
+    },
+    "warning": {
+      "0": "NONE",
+      "1": "LOW",
+      "2": "CRITICAL",
+      "3": "EMERGENCY",
+      "4": "FAILED"
+    }
+  },
+  "battery_status_v0": {
+    "source": {
+      "0": "POWER_MODULE",
+      "1": "EXTERNAL",
+      "2": "ESCS"
+    },
+    "warning": {
+      "0": "NONE",
+      "1": "LOW",
+      "2": "CRITICAL",
+      "3": "EMERGENCY",
+      "4": "FAILED"
+    }
+  },
+  "cellular_status": {
+    "failure_reason": {
+      "0": "NONE",
+      "1": "UNKNOWN",
+      "2": "SIM_MISSING",
+      "3": "SIM_ERROR"
+    },
+    "status": {
+      "1": "FLAG_UNKNOWN",
+      "2": "FLAG_FAILED",
+      "4": "FLAG_INITIALIZING",
+      "8": "FLAG_LOCKED",
+      "16": "FLAG_DISABLED",
+      "32": "FLAG_DISABLING",
+      "64": "FLAG_ENABLING",
+      "128": "FLAG_ENABLED",
+      "256": "FLAG_SEARCHING",
+      "512": "FLAG_REGISTERED",
+      "1024": "FLAG_DISCONNECTING",
+      "2048": "FLAG_CONNECTING",
+      "4096": "FLAG_CONNECTED"
+    }
+  },
+  "config_overrides": {
+    "source_type": {
+      "0": "MODE",
+      "1": "MODE_EXECUTOR"
+    }
+  },
+  "config_overrides_v0": {
+    "source_type": {
+      "0": "MODE",
+      "1": "MODE_EXECUTOR"
+    }
+  },
+  "control_allocator_status": {
+    "actuator_saturation": {
+      "0": "OK",
+      "1": "UPPER_DYN",
+      "2": "UPPER",
+      "-1": "LOWER_DYN",
+      "-2": "LOWER"
+    }
+  },
+  "dataman_response": {
+    "status": {
+      "0": "SUCCESS",
+      "1": "FAILURE_ID_ERR",
+      "2": "FAILURE_NO_DATA",
+      "3": "FAILURE_READ_FAILED",
+      "4": "FAILURE_WRITE_FAILED",
+      "5": "FAILURE_CLEAR_FAILED"
+    }
+  },
+  "device_information": {
+    "device_type": {
+      "0": "GENERIC",
+      "1": "AIRSPEED",
+      "2": "ESC",
+      "3": "SERVO",
+      "4": "GPS",
+      "5": "MAGNETOMETER",
+      "6": "PARACHUTE",
+      "7": "RANGEFINDER",
+      "8": "WINCH",
+      "9": "BAROMETER",
+      "10": "OPTICAL_FLOW",
+      "11": "ACCELEROMETER",
+      "12": "GYROSCOPE",
+      "13": "DIFFERENTIAL_PRESSURE",
+      "14": "BATTERY",
+      "15": "HYGROMETER"
+    }
+  },
+  "distance_sensor": {
+    "mode": {
+      "0": "UNKNOWN",
+      "1": "ENABLED",
+      "2": "DISABLED"
+    }
+  },
+  "dronecan_node_status": {
+    "health": {
+      "0": "OK",
+      "1": "WARNING",
+      "2": "ERROR",
+      "3": "CRITICAL"
+    },
+    "mode": {
+      "0": "OPERATIONAL",
+      "1": "INITIALIZATION",
+      "2": "MAINTENANCE",
+      "3": "SOFTWARE_UPDATE",
+      "7": "OFFLINE"
+    }
+  },
+  "esc_report": {
+    "actuator_function": {
+      "101": "MOTOR1",
+      "112": "MOTOR_MAX"
+    }
+  },
+  "flight_phase_estimation": {
+    "flight_phase": {
+      "0": "UNKNOWN",
+      "1": "LEVEL",
+      "2": "DESCEND",
+      "3": "CLIMB"
+    }
+  },
+  "generator_status": {
+    "status": {
+      "1": "FLAG_OFF",
+      "2": "FLAG_READY",
+      "4": "FLAG_GENERATING",
+      "8": "FLAG_CHARGING",
+      "16": "FLAG_REDUCED_POWER",
+      "32": "FLAG_MAXPOWER",
+      "64": "FLAG_OVERTEMP_WARNING",
+      "128": "FLAG_OVERTEMP_FAULT",
+      "256": "FLAG_ELECTRONICS_OVERTEMP_WARNING",
+      "512": "FLAG_ELECTRONICS_OVERTEMP_FAULT",
+      "1024": "FLAG_ELECTRONICS_FAULT",
+      "2048": "FLAG_POWERSOURCE_FAULT",
+      "4096": "FLAG_COMMUNICATION_WARNING",
+      "8192": "FLAG_COOLING_WARNING",
+      "16384": "FLAG_POWER_RAIL_FAULT",
+      "32768": "FLAG_OVERCURRENT_FAULT",
+      "65536": "FLAG_BATTERY_OVERCHARGE_CURRENT_FAULT",
+      "131072": "FLAG_OVERVOLTAGE_FAULT",
+      "262144": "FLAG_BATTERY_UNDERVOLT_FAULT",
+      "524288": "FLAG_START_INHIBITED",
+      "1048576": "FLAG_MAINTENANCE_REQUIRED",
+      "2097152": "FLAG_WARMING_UP",
+      "4194304": "FLAG_IDLE"
+    }
+  },
+  "gimbal_device_attitude_status": {
+    "device_flags": {
+      "1": "RETRACT",
+      "2": "NEUTRAL",
+      "4": "ROLL_LOCK",
+      "8": "PITCH_LOCK",
+      "16": "YAW_LOCK",
+      "32": "YAW_IN_VEHICLE_FRAME",
+      "64": "YAW_IN_EARTH_FRAME"
+    }
+  },
+  "gps_dump": {
+    "instance": {
+      "0": "MAIN",
+      "1": "SECONDARY"
+    }
+  },
+  "gripper": {
+    "command": {
+      "0": "GRAB",
+      "1": "RELEASE"
+    }
+  },
+  "heater_status": {
+    "mode": {
+      "1": "GPIO",
+      "2": "PX4IO"
+    }
+  },
+  "input_rc": {
+    "rssi": {
+      "100": "MAX"
+    }
+  },
+  "internal_combustion_engine_status": {
+    "state": {
+      "0": "STOPPED",
+      "1": "STARTING",
+      "2": "RUNNING",
+      "3": "FAULT"
+    }
+  },
+  "led_control": {
+    "color": {
+      "0": "OFF",
+      "1": "RED",
+      "2": "GREEN",
+      "3": "BLUE",
+      "4": "YELLOW",
+      "5": "PURPLE",
+      "6": "AMBER",
+      "7": "CYAN",
+      "8": "WHITE"
+    },
+    "mode": {
+      "0": "OFF",
+      "1": "ON",
+      "2": "DISABLED",
+      "3": "BLINK_SLOW",
+      "4": "BLINK_NORMAL",
+      "5": "BLINK_FAST",
+      "6": "BREATHE",
+      "7": "FLASH"
+    },
+    "num_blinks": {
+      "3": "SLOW",
+      "4": "NORMAL",
+      "5": "FAST"
+    }
+  },
+  "logger_status": {
+    "backend": {
+      "1": "FILE",
+      "2": "MAVLINK",
+      "3": "ALL"
+    }
+  },
+  "manual_control_switches": {
+    "mode_slot": {
+      "0": "NONE",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6"
+    }
+  },
+  "mode_completed": {
+    "result": {
+      "0": "SUCCESS",
+      "100": "FAILURE_OTHER"
+    }
+  },
+  "navigator_status": {
+    "failure": {
+      "0": "NONE",
+      "1": "HAGL"
+    }
+  },
+  "orbit_status": {
+    "frame": {
+      "0": "GLOBAL",
+      "1": "LOCAL_NED",
+      "3": "GLOBAL_RELATIVE_ALT",
+      "10": "GLOBAL_TERRAIN_ALT"
+    }
+  },
+  "power_button_state": {
+    "event": {
+      "0": "IDEL",
+      "1": "DOWN",
+      "2": "UP",
+      "3": "REQUEST_SHUTDOWN"
+    }
+  },
+  "ranging_beacon": {
+    "alt_type": {
+      "0": "WGS84",
+      "1": "MSL"
+    }
+  },
+  "raptor_status": {
+    "exit_reason": {
+      "0": "NONE",
+      "1": "NO_ANGULAR_VELOCITY_UPDATE",
+      "2": "NOT_ALL_OBSERVATIONS_SET",
+      "3": "ANGULAR_VELOCITY_STALE",
+      "4": "LOCAL_POSITION_STALE",
+      "5": "ATTITUDE_STALE",
+      "6": "EXECUTOR_STATUS_SOURCE_NOT_CONTROL"
+    }
+  },
+  "rc_channels": {
+    "function": {
+      "0": "THROTTLE",
+      "1": "ROLL",
+      "2": "PITCH",
+      "3": "YAW",
+      "4": "RETURN",
+      "5": "LOITER",
+      "6": "OFFBOARD",
+      "7": "FLAPS",
+      "8": "AUX_1",
+      "9": "AUX_2",
+      "10": "AUX_3",
+      "11": "AUX_4",
+      "12": "AUX_5",
+      "13": "AUX_6",
+      "14": "PARAM_1",
+      "15": "PARAM_2",
+      "16": "PARAM_3_5",
+      "17": "KILLSWITCH",
+      "18": "TRANSITION",
+      "19": "GEAR",
+      "20": "ARMSWITCH",
+      "21": "FLTBTN_SLOT_1",
+      "22": "FLTBTN_SLOT_2",
+      "23": "FLTBTN_SLOT_3",
+      "24": "FLTBTN_SLOT_4",
+      "25": "FLTBTN_SLOT_5",
+      "26": "FLTBTN_SLOT_6",
+      "27": "ENGAGE_MAIN_MOTOR",
+      "28": "PAYLOAD_POWER",
+      "29": "TERMINATION"
+    }
+  },
+  "sensor_gps": {
+    "authentication_state": {
+      "0": "UNKNOWN",
+      "1": "INITIALIZING",
+      "2": "ERROR",
+      "3": "OK",
+      "4": "DISABLED"
+    },
+    "fix_type": {
+      "1": "NONE",
+      "2": "2D",
+      "3": "3D",
+      "4": "RTCM_CODE_DIFFERENTIAL",
+      "5": "RTK_FLOAT",
+      "6": "RTK_FIXED",
+      "8": "EXTRAPOLATED"
+    },
+    "jamming_state": {
+      "0": "UNKNOWN",
+      "1": "OK",
+      "2": "MITIGATED",
+      "3": "DETECTED"
+    },
+    "rtcm_msg_used": {
+      "0": "UNKNOWN",
+      "1": "NOT_USED",
+      "2": "USED"
+    },
+    "spoofing_state": {
+      "0": "UNKNOWN",
+      "1": "OK",
+      "2": "MITIGATED",
+      "3": "DETECTED"
+    },
+    "system_error": {
+      "0": "OK",
+      "1": "INCOMING_CORRECTIONS",
+      "2": "CONFIGURATION",
+      "4": "SOFTWARE",
+      "8": "ANTENNA",
+      "16": "EVENT_CONGESTION",
+      "32": "CPU_OVERLOAD",
+      "64": "OUTPUT_CONGESTION"
+    }
+  },
+  "sensor_optical_flow": {
+    "mode": {
+      "0": "UNKNOWN",
+      "1": "BRIGHT",
+      "2": "LOWLIGHT",
+      "3": "SUPER_LOWLIGHT"
+    }
+  },
+  "takeoff_status": {
+    "takeoff_state": {
+      "0": "UNINITIALIZED",
+      "1": "DISARMED",
+      "2": "SPOOLUP",
+      "3": "READY_FOR_TAKEOFF",
+      "4": "RAMPUP",
+      "5": "FLIGHT"
+    }
+  },
+  "timesync_status": {
+    "source_protocol": {
+      "0": "UNKNOWN",
+      "1": "MAVLINK",
+      "2": "DDS"
+    }
+  },
+  "tune_control": {
+    "tune_id": {
+      "0": "STOP",
+      "1": "STARTUP",
+      "2": "ERROR",
+      "3": "NOTIFY_POSITIVE",
+      "4": "NOTIFY_NEUTRAL",
+      "5": "NOTIFY_NEGATIVE",
+      "6": "ARMING_WARNING",
+      "7": "BATTERY_WARNING_SLOW",
+      "8": "BATTERY_WARNING_FAST",
+      "9": "GPS_WARNING",
+      "10": "ARMING_FAILURE",
+      "11": "PARACHUTE_RELEASE",
+      "12": "SINGLE_BEEP",
+      "13": "HOME_SET",
+      "14": "SD_INIT",
+      "15": "SD_ERROR",
+      "16": "PROG_PX4IO",
+      "17": "PROG_PX4IO_OK",
+      "18": "PROG_PX4IO_ERR",
+      "19": "POWER_OFF"
+    },
+    "volume": {
+      "0": "LEVEL_MIN",
+      "20": "LEVEL_DEFAULT",
+      "100": "LEVEL_MAX"
+    }
+  },
+  "uavcan_parameter_request": {
+    "message_type": {
+      "20": "PARAM_REQUEST_READ",
+      "21": "PARAM_REQUEST_LIST",
+      "23": "PARAM_SET"
+    },
+    "node_id": {
+      "0": "ALL"
+    },
+    "param_type": {
+      "1": "UINT8",
+      "8": "INT64",
+      "9": "REAL32"
+    }
+  },
+  "ulog_stream": {
+    "flags": {
+      "1": "NEED_ACK"
+    }
+  },
+  "vehicle_odometry": {
+    "pose_frame": {
+      "0": "UNKNOWN",
+      "1": "NED",
+      "2": "FRD"
+    },
+    "velocity_frame": {
+      "0": "UNKNOWN",
+      "1": "NED",
+      "2": "FRD",
+      "3": "BODY_FRD"
+    }
+  },
+  "vehicle_status": {
+    "arming_state": {
+      "1": "DISARMED",
+      "2": "ARMED"
+    },
+    "failsafe_defer_state": {
+      "0": "DISABLED",
+      "1": "ENABLED",
+      "2": "WOULD_FAILSAFE"
+    },
+    "hil_state": {
+      "0": "OFF",
+      "1": "ON"
+    },
+    "latest_arming_reason": {
+      "1": "STICK_GESTURE",
+      "2": "RC_SWITCH",
+      "3": "COMMAND_INTERNAL",
+      "4": "COMMAND_EXTERNAL",
+      "5": "MISSION_START",
+      "6": "LANDING",
+      "7": "PREFLIGHT_INACTION",
+      "8": "KILL_SWITCH",
+      "13": "RC_BUTTON",
+      "14": "FAILSAFE"
+    },
+    "latest_disarming_reason": {
+      "1": "STICK_GESTURE",
+      "2": "RC_SWITCH",
+      "3": "COMMAND_INTERNAL",
+      "4": "COMMAND_EXTERNAL",
+      "5": "MISSION_START",
+      "6": "LANDING",
+      "7": "PREFLIGHT_INACTION",
+      "8": "KILL_SWITCH",
+      "13": "RC_BUTTON",
+      "14": "FAILSAFE"
+    },
+    "nav_state": {
+      "0": "MANUAL",
+      "1": "ALTCTL",
+      "2": "POSCTL",
+      "3": "AUTO_MISSION",
+      "4": "AUTO_LOITER",
+      "5": "AUTO_RTL",
+      "6": "POSITION_SLOW",
+      "7": "FREE5",
+      "8": "ALTITUDE_CRUISE",
+      "9": "FREE3",
+      "10": "ACRO",
+      "11": "FREE2",
+      "12": "DESCEND",
+      "13": "TERMINATION",
+      "14": "OFFBOARD",
+      "15": "STAB",
+      "16": "FREE1",
+      "17": "AUTO_TAKEOFF",
+      "18": "AUTO_LAND",
+      "19": "AUTO_FOLLOW_TARGET",
+      "20": "AUTO_PRECLAND",
+      "21": "ORBIT",
+      "22": "AUTO_VTOL_TAKEOFF",
+      "23": "EXTERNAL1",
+      "24": "EXTERNAL2",
+      "25": "EXTERNAL3",
+      "26": "EXTERNAL4",
+      "27": "EXTERNAL5",
+      "28": "EXTERNAL6",
+      "29": "EXTERNAL7",
+      "30": "EXTERNAL8",
+      "31": "MAX"
+    },
+    "vehicle_type": {
+      "0": "UNSPECIFIED",
+      "1": "ROTARY_WING",
+      "2": "FIXED_WING",
+      "3": "ROVER"
+    }
+  },
+  "vehicle_status_v0": {
+    "arming_state": {
+      "1": "DISARMED",
+      "2": "ARMED"
+    },
+    "failsafe_defer_state": {
+      "0": "DISABLED",
+      "1": "ENABLED",
+      "2": "WOULD_FAILSAFE"
+    },
+    "hil_state": {
+      "0": "OFF",
+      "1": "ON"
+    },
+    "latest_arming_reason": {
+      "0": "TRANSITION_TO_STANDBY",
+      "1": "STICK_GESTURE",
+      "2": "RC_SWITCH",
+      "3": "COMMAND_INTERNAL",
+      "4": "COMMAND_EXTERNAL",
+      "5": "MISSION_START",
+      "6": "SAFETY_BUTTON",
+      "7": "AUTO_DISARM_LAND",
+      "8": "AUTO_DISARM_PREFLIGHT",
+      "9": "KILL_SWITCH",
+      "10": "LOCKDOWN",
+      "11": "FAILURE_DETECTOR",
+      "12": "SHUTDOWN",
+      "13": "UNIT_TEST"
+    },
+    "latest_disarming_reason": {
+      "0": "TRANSITION_TO_STANDBY",
+      "1": "STICK_GESTURE",
+      "2": "RC_SWITCH",
+      "3": "COMMAND_INTERNAL",
+      "4": "COMMAND_EXTERNAL",
+      "5": "MISSION_START",
+      "6": "SAFETY_BUTTON",
+      "7": "AUTO_DISARM_LAND",
+      "8": "AUTO_DISARM_PREFLIGHT",
+      "9": "KILL_SWITCH",
+      "10": "LOCKDOWN",
+      "11": "FAILURE_DETECTOR",
+      "12": "SHUTDOWN",
+      "13": "UNIT_TEST"
+    },
+    "nav_state": {
+      "0": "MANUAL",
+      "1": "ALTCTL",
+      "2": "POSCTL",
+      "3": "AUTO_MISSION",
+      "4": "AUTO_LOITER",
+      "5": "AUTO_RTL",
+      "6": "POSITION_SLOW",
+      "7": "FREE5",
+      "8": "FREE4",
+      "9": "FREE3",
+      "10": "ACRO",
+      "11": "FREE2",
+      "12": "DESCEND",
+      "13": "TERMINATION",
+      "14": "OFFBOARD",
+      "15": "STAB",
+      "16": "FREE1",
+      "17": "AUTO_TAKEOFF",
+      "18": "AUTO_LAND",
+      "19": "AUTO_FOLLOW_TARGET",
+      "20": "AUTO_PRECLAND",
+      "21": "ORBIT",
+      "22": "AUTO_VTOL_TAKEOFF",
+      "23": "EXTERNAL1",
+      "24": "EXTERNAL2",
+      "25": "EXTERNAL3",
+      "26": "EXTERNAL4",
+      "27": "EXTERNAL5",
+      "28": "EXTERNAL6",
+      "29": "EXTERNAL7",
+      "30": "EXTERNAL8",
+      "31": "MAX"
+    },
+    "vehicle_type": {
+      "0": "UNKNOWN",
+      "1": "ROTARY_WING",
+      "2": "FIXED_WING",
+      "3": "ROVER",
+      "4": "AIRSHIP"
+    }
+  },
+  "vehicle_status_v1": {
+    "arming_state": {
+      "1": "DISARMED",
+      "2": "ARMED"
+    },
+    "failsafe_defer_state": {
+      "0": "DISABLED",
+      "1": "ENABLED",
+      "2": "WOULD_FAILSAFE"
+    },
+    "hil_state": {
+      "0": "OFF",
+      "1": "ON"
+    },
+    "latest_arming_reason": {
+      "1": "STICK_GESTURE",
+      "2": "RC_SWITCH",
+      "3": "COMMAND_INTERNAL",
+      "4": "COMMAND_EXTERNAL",
+      "5": "MISSION_START",
+      "6": "LANDING",
+      "7": "PREFLIGHT_INACTION",
+      "8": "KILL_SWITCH",
+      "13": "RC_BUTTON",
+      "14": "FAILSAFE"
+    },
+    "latest_disarming_reason": {
+      "1": "STICK_GESTURE",
+      "2": "RC_SWITCH",
+      "3": "COMMAND_INTERNAL",
+      "4": "COMMAND_EXTERNAL",
+      "5": "MISSION_START",
+      "6": "LANDING",
+      "7": "PREFLIGHT_INACTION",
+      "8": "KILL_SWITCH",
+      "13": "RC_BUTTON",
+      "14": "FAILSAFE"
+    },
+    "nav_state": {
+      "0": "MANUAL",
+      "1": "ALTCTL",
+      "2": "POSCTL",
+      "3": "AUTO_MISSION",
+      "4": "AUTO_LOITER",
+      "5": "AUTO_RTL",
+      "6": "POSITION_SLOW",
+      "7": "FREE5",
+      "8": "ALTITUDE_CRUISE",
+      "9": "FREE3",
+      "10": "ACRO",
+      "11": "FREE2",
+      "12": "DESCEND",
+      "13": "TERMINATION",
+      "14": "OFFBOARD",
+      "15": "STAB",
+      "16": "FREE1",
+      "17": "AUTO_TAKEOFF",
+      "18": "AUTO_LAND",
+      "19": "AUTO_FOLLOW_TARGET",
+      "20": "AUTO_PRECLAND",
+      "21": "ORBIT",
+      "22": "AUTO_VTOL_TAKEOFF",
+      "23": "EXTERNAL1",
+      "24": "EXTERNAL2",
+      "25": "EXTERNAL3",
+      "26": "EXTERNAL4",
+      "27": "EXTERNAL5",
+      "28": "EXTERNAL6",
+      "29": "EXTERNAL7",
+      "30": "EXTERNAL8",
+      "31": "MAX"
+    },
+    "vehicle_type": {
+      "0": "UNSPECIFIED",
+      "1": "ROTARY_WING",
+      "2": "FIXED_WING",
+      "3": "ROVER"
+    }
+  },
+  "vehicle_status_v2": {
+    "arming_state": {
+      "1": "DISARMED",
+      "2": "ARMED"
+    },
+    "failsafe_defer_state": {
+      "0": "DISABLED",
+      "1": "ENABLED",
+      "2": "WOULD_FAILSAFE"
+    },
+    "hil_state": {
+      "0": "OFF",
+      "1": "ON"
+    },
+    "latest_arming_reason": {
+      "1": "STICK_GESTURE",
+      "2": "RC_SWITCH",
+      "3": "COMMAND_INTERNAL",
+      "4": "COMMAND_EXTERNAL",
+      "5": "MISSION_START",
+      "6": "LANDING",
+      "7": "PREFLIGHT_INACTION",
+      "8": "KILL_SWITCH",
+      "13": "RC_BUTTON",
+      "14": "FAILSAFE"
+    },
+    "latest_disarming_reason": {
+      "1": "STICK_GESTURE",
+      "2": "RC_SWITCH",
+      "3": "COMMAND_INTERNAL",
+      "4": "COMMAND_EXTERNAL",
+      "5": "MISSION_START",
+      "6": "LANDING",
+      "7": "PREFLIGHT_INACTION",
+      "8": "KILL_SWITCH",
+      "13": "RC_BUTTON",
+      "14": "FAILSAFE"
+    },
+    "nav_state": {
+      "0": "MANUAL",
+      "1": "ALTCTL",
+      "2": "POSCTL",
+      "3": "AUTO_MISSION",
+      "4": "AUTO_LOITER",
+      "5": "AUTO_RTL",
+      "6": "POSITION_SLOW",
+      "7": "FREE5",
+      "8": "ALTITUDE_CRUISE",
+      "9": "FREE3",
+      "10": "ACRO",
+      "11": "FREE2",
+      "12": "DESCEND",
+      "13": "TERMINATION",
+      "14": "OFFBOARD",
+      "15": "STAB",
+      "16": "FREE1",
+      "17": "AUTO_TAKEOFF",
+      "18": "AUTO_LAND",
+      "19": "AUTO_FOLLOW_TARGET",
+      "20": "AUTO_PRECLAND",
+      "21": "ORBIT",
+      "22": "AUTO_VTOL_TAKEOFF",
+      "23": "EXTERNAL1",
+      "24": "EXTERNAL2",
+      "25": "EXTERNAL3",
+      "26": "EXTERNAL4",
+      "27": "EXTERNAL5",
+      "28": "EXTERNAL6",
+      "29": "EXTERNAL7",
+      "30": "EXTERNAL8",
+      "31": "MAX"
+    },
+    "vehicle_type": {
+      "0": "UNSPECIFIED",
+      "1": "ROTARY_WING",
+      "2": "FIXED_WING",
+      "3": "ROVER"
+    }
+  },
+  "vehicle_status_v3": {
+    "arming_state": {
+      "1": "DISARMED",
+      "2": "ARMED"
+    },
+    "failsafe_defer_state": {
+      "0": "DISABLED",
+      "1": "ENABLED",
+      "2": "WOULD_FAILSAFE"
+    },
+    "hil_state": {
+      "0": "OFF",
+      "1": "ON"
+    },
+    "latest_arming_reason": {
+      "1": "STICK_GESTURE",
+      "2": "RC_SWITCH",
+      "3": "COMMAND_INTERNAL",
+      "4": "COMMAND_EXTERNAL",
+      "5": "MISSION_START",
+      "6": "LANDING",
+      "7": "PREFLIGHT_INACTION",
+      "8": "KILL_SWITCH",
+      "13": "RC_BUTTON",
+      "14": "FAILSAFE"
+    },
+    "latest_disarming_reason": {
+      "1": "STICK_GESTURE",
+      "2": "RC_SWITCH",
+      "3": "COMMAND_INTERNAL",
+      "4": "COMMAND_EXTERNAL",
+      "5": "MISSION_START",
+      "6": "LANDING",
+      "7": "PREFLIGHT_INACTION",
+      "8": "KILL_SWITCH",
+      "13": "RC_BUTTON",
+      "14": "FAILSAFE"
+    },
+    "nav_state": {
+      "0": "MANUAL",
+      "1": "ALTCTL",
+      "2": "POSCTL",
+      "3": "AUTO_MISSION",
+      "4": "AUTO_LOITER",
+      "5": "AUTO_RTL",
+      "6": "POSITION_SLOW",
+      "7": "FREE5",
+      "8": "ALTITUDE_CRUISE",
+      "9": "FREE3",
+      "10": "ACRO",
+      "11": "FREE2",
+      "12": "DESCEND",
+      "13": "TERMINATION",
+      "14": "OFFBOARD",
+      "15": "STAB",
+      "16": "FREE1",
+      "17": "AUTO_TAKEOFF",
+      "18": "AUTO_LAND",
+      "19": "AUTO_FOLLOW_TARGET",
+      "20": "AUTO_PRECLAND",
+      "21": "ORBIT",
+      "22": "AUTO_VTOL_TAKEOFF",
+      "23": "EXTERNAL1",
+      "24": "EXTERNAL2",
+      "25": "EXTERNAL3",
+      "26": "EXTERNAL4",
+      "27": "EXTERNAL5",
+      "28": "EXTERNAL6",
+      "29": "EXTERNAL7",
+      "30": "EXTERNAL8",
+      "31": "MAX"
+    },
+    "vehicle_type": {
+      "0": "UNSPECIFIED",
+      "1": "ROTARY_WING",
+      "2": "FIXED_WING",
+      "3": "ROVER"
+    }
+  },
+  "vtol_vehicle_status": {
+    "vehicle_vtol_state": {
+      "0": "UNDEFINED",
+      "1": "TRANSITION_TO_FW",
+      "2": "TRANSITION_TO_MC",
+      "3": "MC",
+      "4": "FW"
+    }
+  },
+  "vtx": {
+    "band": {
+      "12": "NAME_LENGTH"
+    },
+    "band_name": {
+      "12": "LENGTH"
+    },
+    "device": {
+      "0": "UNKNOWN",
+      "20": "PEAK_THOR_T67",
+      "40": "RUSH_MAX_SOLO"
+    },
+    "mode": {
+      "0": "NORMAL",
+      "1": "PIT"
+    },
+    "power_label": {
+      "4": "LENGTH"
+    },
+    "protocol": {
+      "0": "NONE",
+      "10": "SMART_AUDIO_V1",
+      "20": "SMART_AUDIO_V2",
+      "21": "SMART_AUDIO_V2_1",
+      "100": "TRAMP"
+    }
+  }
+}
